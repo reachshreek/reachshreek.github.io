@@ -1,0 +1,169 @@
+<!-- homepage.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Website, Shree, Khangaonkar">
+    <meta name="description" content="Portfolio website of Shree Khangaonkar, an Electrical and Computer
+     Engineer showcasing technical projects, coursework, research interests, and ways to connect.">
+    <title>Shree Khangaonkar's Website'</title>
+    <link rel="stylesheet" href="main.css">
+
+    <style>
+        #bigbox{
+            margin-top: 30px;
+            /* border: 2px solid black; */
+            height: 700px;
+        }
+
+        /* Shared fade-in setup */
+        .fade-step {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.6s ease;
+        }
+        .fade-step.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #shreenamebox{
+            /* border: 2px solid white; */
+            height: 350px;
+            display: flex;              
+            align-items: center;       
+            justify-content: center;     
+            text-align: center;        
+        }
+        #shreenamebox h1{
+            margin: 0; 
+            line-height: 1;
+            font-size: clamp(48px, 10vw, 120px);
+            color: rgb(86, 13, 64);
+        }
+
+        #subtitle {
+            text-align: center;
+            height: auto;
+            margin-top: -40px; 
+            margin-bottom: 80px;
+        }
+        #subtitle h2 {
+            margin: 0;
+            display: inline-block;
+            padding: 10px 22px;
+            font-family: georgia, serif;
+            font-size: 22px;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            color: rgb(73, 36, 62);
+            background: rgba(255, 255, 255, 0.55);
+            border-radius: 999px;
+            border: 1px solid rgba(73, 36, 62, 0.3);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+        .cta-buttons {
+            margin-top: 24px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .btn {
+            padding: 18px 40px;
+            border-radius: 999px;
+            font-family: georgia, serif;
+            font-size: 20px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: 2px solid rgb(73, 36, 62);
+            transition: all 0.3s ease;
+            min-width: 220px;
+            text-align: center;
+        }
+        .primary-btn {
+            background-color: rgb(73, 36, 62);
+            color: rgb(219, 175, 160);
+        }
+        .secondary-btn {
+            background-color: transparent;
+            color: rgb(73, 36, 62);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            background-color: rgb(187, 132, 147);
+            color: rgb(73, 36, 62);
+        }
+        #subtitle-link {
+            text-decoration: none;
+        }
+        #subtitle-link h2 {
+            display: inline-block;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="navbar">
+        <div id="pagenav">
+            <a href="homepage.html">Home</a>
+            <a href="aboutme.html">About Me</a>
+            <a href="projects.html">Projects</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div id="links">
+            <a href="https://www.linkedin.com/in/shree-khangaonkar/"  target="_blank">
+                <img id="linkedinlogo" src="img/linkedinlogo.png" alt="Linkedin Logo">
+            </a>  
+            <a href="https://github.com/reachshreek"  target="_blank">
+                <img id="githublogo" src="img/githublogo.png" alt="Github Logo">
+            </a>          
+        </div>
+    </div>
+
+    <div id="bigbox">
+        <div id="shreenamebox" class="fade-step">
+            <h1>Shree Khangaonkar</h1>
+        </div>
+
+        <div id="subtitle" class="fade-step">
+            <a href="aboutme.html" id="subtitle-link">
+                <h2>Electrical &amp; Computer Engineer</h2>
+            </a>
+        </div>
+
+        <div class="cta-buttons fade-step">
+            <a href="projects.html" class="btn primary-btn">
+                Check My Projects
+            </a>
+            <a href="Shree_Resume.pdf" class="btn secondary-btn" target="_blank" download>
+                Download CV
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Run after full page load
+        window.addEventListener('load', () => {
+            const steps = [
+                document.getElementById('shreenamebox'),
+                document.getElementById('subtitle'),
+                document.querySelector('.cta-buttons')
+            ];
+
+            steps.forEach((el, index) => {
+                if (!el) return;
+                setTimeout(() => {
+                    el.classList.add('show');
+                }, 400 * index); // 0ms, 400ms, 800ms
+            });
+        });
+    </script>
+    <footer id="footer">
+         <p>© 2025 Shree Khangaonkar. All rights reserved.</p>
+    </footer>
+</body>
+</html>

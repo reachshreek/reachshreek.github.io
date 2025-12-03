@@ -1,0 +1,129 @@
+/* main.css */
+
+body{
+    background-color: rgb(219, 175, 160);
+    margin: 0;
+
+    /* make footer stick to bottom when content is short */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+@font-face {
+  font-family: myFont; /* set name */
+  src: url(sansation_light.woff); /* url of the font */
+}
+#navbar{
+    background-color: rgb(245, 214, 201); /* soft light blush */
+    display: flex;
+    /* border: 2px solid black; */
+    height: 80px;
+    width: 100%;
+    margin: 0 auto;
+    gap: 60%;
+}
+#navbar div{
+    margin-top: 5px;
+}
+#pagenav{
+    display: flex;
+    width: 25%;
+    height: 50px;
+    justify-content: center;
+    margin-left: 2%;
+    overflow: hidden;
+    padding-bottom: 10px;
+    /* background-color: aquamarine; */
+}
+#pagenav a{ 
+    font-family: georgia;
+    color: rgb(73, 36, 62);
+    border-right: 1px solid rgb(73, 36, 62);
+    border-left: 1px solid rgb(73, 36, 62);
+    border-top: 2px solid rgb(73, 36, 62);
+    border-bottom: 2px solid rgb(73, 36, 62);
+    width: 300px;
+    height: 55px;                  /* consistent height */
+    display: flex;                  /* center text vertically & horizontally */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    padding: 0;                     /* remove old padding so centering works cleanly */
+}
+#pagenav a:first-child{
+    border-left: 2px solid rgb(73, 36, 62);
+}
+#pagenav a:nth-child(4){
+    border-right: 2px solid rgb(73, 36, 62);
+}
+#pagenav a:hover{ 
+    transition: background-color 0.75s ease;
+    background-color: rgb(187, 132, 147);
+
+}
+#links{
+    width: 20%;
+    height: 50px;
+    display: flex;          /* row by default */
+    align-items: flex-start;
+    gap: 10px;;
+    /* background-color: aqua; */
+}
+#githublogo{
+    height:70px;
+    width:auto;
+}
+#linkedinlogo{
+    height: 72px;
+    width: auto;
+}
+/* Navbar left-to-right animation */
+@keyframes navIn {
+    from {
+        opacity: 0;
+        transform: translateX(-25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+#pagenav a,
+#links a img {
+    opacity: 0;
+    transform: translateX(-25px);
+    animation: navIn 0.5s ease forwards;
+}
+#pagenav a:nth-child(1) {
+    animation-delay: 0.05s;
+}
+#pagenav a:nth-child(2) {
+    animation-delay: 0.15s;
+}
+#pagenav a:nth-child(3) {
+    animation-delay: 0.25s;
+}
+#pagenav a:nth-child(4) {
+    animation-delay: 0.35s;
+}
+#links a:nth-child(1) img {
+    animation-delay: 0.45s;
+}
+#links a:nth-child(2) img {
+    animation-delay: 0.55s;
+}
+#bigbox {
+    flex: 1;  /* this makes the main content take up remaining space */
+}
+
+#footer {
+    background-color: rgb(245, 214, 201);
+    color: rgb(73, 36, 62);
+    text-align: center;
+    padding: 16px 0;
+    margin-top: 40px;
+    font-family: georgia, serif;
+    font-size: 0.9rem;
+}
+
