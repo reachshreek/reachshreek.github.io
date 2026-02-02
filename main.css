@@ -1,129 +1,219 @@
 /* main.css */
 
+/* ===== Theme tokens (re-use across every page) ===== */
+:root{
+  --bg: rgb(219, 175, 160);
+  --card: rgb(245, 214, 201);
+  --accent: rgb(73, 36, 62);
+  --hover: rgb(187, 132, 147);
+
+  --border: 2px solid var(--accent);
+
+  /* Fluid spacing + sizing */
+  --page-pad: clamp(12px, 3vw, 28px);
+  --nav-h: clamp(64px, 8vw, 86px);
+  --nav-gap: clamp(10px, 2vw, 18px);
+}
+
+/* ===== Base page layout ===== */
 body{
-    background-color: rgb(219, 175, 160);
-    margin: 0;
+  background-color: var(--bg);
+  margin: 0;
 
-    /* make footer stick to bottom when content is short */
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  /* make footer stick to bottom when content is short */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
+
 @font-face {
-  font-family: myFont; /* set name */
-  src: url(sansation_light.woff); /* url of the font */
+  font-family: myFont;
+  src: url(sansation_light.woff);
 }
-#navbar{
-    background-color: rgb(245, 214, 201); /* soft light blush */
-    display: flex;
-    /* border: 2px solid black; */
-    height: 80px;
-    width: 100%;
-    margin: 0 auto;
-    gap: 60%;
-}
-#navbar div{
-    margin-top: 5px;
-}
-#pagenav{
-    display: flex;
-    width: 25%;
-    height: 50px;
-    justify-content: center;
-    margin-left: 2%;
-    overflow: hidden;
-    padding-bottom: 10px;
-    /* background-color: aquamarine; */
-}
-#pagenav a{ 
-    font-family: georgia;
-    color: rgb(73, 36, 62);
-    border-right: 1px solid rgb(73, 36, 62);
-    border-left: 1px solid rgb(73, 36, 62);
-    border-top: 2px solid rgb(73, 36, 62);
-    border-bottom: 2px solid rgb(73, 36, 62);
-    width: 300px;
-    height: 55px;                  /* consistent height */
-    display: flex;                  /* center text vertically & horizontally */
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    text-decoration: none;
-    padding: 0;                     /* remove old padding so centering works cleanly */
-}
-#pagenav a:first-child{
-    border-left: 2px solid rgb(73, 36, 62);
-}
-#pagenav a:nth-child(4){
-    border-right: 2px solid rgb(73, 36, 62);
-}
-#pagenav a:hover{ 
-    transition: background-color 0.75s ease;
-    background-color: rgb(187, 132, 147);
 
+#bigbox {
+  flex: 1;  /* main content area takes remaining space */
 }
+
+/* ===== NAVBAR (responsive, not pixel-bound) ===== */
+#navbar{
+  background-color: var(--card);
+  width: 100%;
+  min-height: var(--nav-h);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 10px var(--page-pad);
+  box-sizing: border-box;
+  gap: var(--nav-gap);
+}
+
+/* remove old fixed top spacing */
+#navbar div{
+  margin-top: 0;
+}
+
+/* Links container */
+#pagenav{
+  display: flex;
+  align-items: center;
+  gap: 0;             /* borders create the separation */
+  flex: 1 1 auto;
+  min-width: 0;       /* prevents overflow in flex layouts */
+}
+
+/* Links: fluid padding, no fixed widths */
+#pagenav a{
+  font-family: georgia, serif;
+  color: var(--accent);
+  text-decoration: none;
+
+  padding: clamp(10px, 1.2vw, 14px) clamp(14px, 2vw, 22px);
+  line-height: 1;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  /* allow shrink/wrap behavior */
+  flex: 0 1 auto;
+  white-space: nowrap;
+
+  border-top: var(--border);
+  border-bottom: var(--border);
+  border-left: 1px solid var(--accent);
+  border-right: 1px solid var(--accent);
+
+  transition: background-color 0.35s ease, transform 0.2s ease;
+  will-change: transform;
+}
+
+/* Outer edges thicker like your original */
+#pagenav a:first-child{
+  border-left: var(--border);
+}
+#pagenav a:last-child{
+  border-right: var(--border);
+}
+
+#pagenav a:hover{
+  background-color: var(--hover);
+  transform: translateY(-1px);
+}
+
+/* Social icons container */
 #links{
-    width: 20%;
-    height: 50px;
-    display: flex;          /* row by default */
-    align-items: flex-start;
-    gap: 10px;;
-    /* background-color: aqua; */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex: 0 0 auto;
 }
-#githublogo{
-    height:70px;
-    width:auto;
-}
+
+/* Responsive icon sizing */
+#githublogo,
 #linkedinlogo{
-    height: 72px;
-    width: auto;
+  height: clamp(44px, 6vw, 72px);
+  width: auto;
+  display: block;
 }
-/* Navbar left-to-right animation */
+
+/* Navbar entrance animation */
 @keyframes navIn {
-    from {
-        opacity: 0;
-        transform: translateX(-25px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-#pagenav a,
-#links a img {
+  from {
     opacity: 0;
     transform: translateX(-25px);
-    animation: navIn 0.5s ease forwards;
-}
-#pagenav a:nth-child(1) {
-    animation-delay: 0.05s;
-}
-#pagenav a:nth-child(2) {
-    animation-delay: 0.15s;
-}
-#pagenav a:nth-child(3) {
-    animation-delay: 0.25s;
-}
-#pagenav a:nth-child(4) {
-    animation-delay: 0.35s;
-}
-#links a:nth-child(1) img {
-    animation-delay: 0.45s;
-}
-#links a:nth-child(2) img {
-    animation-delay: 0.55s;
-}
-#bigbox {
-    flex: 1;  /* this makes the main content take up remaining space */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
+#pagenav a,
+#links a img {
+  opacity: 0;
+  transform: translateX(-25px);
+  animation: navIn 0.5s ease forwards;
+}
+
+#pagenav a:nth-child(1) { animation-delay: 0.05s; }
+#pagenav a:nth-child(2) { animation-delay: 0.15s; }
+#pagenav a:nth-child(3) { animation-delay: 0.25s; }
+#pagenav a:nth-child(4) { animation-delay: 0.35s; }
+
+#links a:nth-child(1) img { animation-delay: 0.45s; }
+#links a:nth-child(2) img { animation-delay: 0.55s; }
+
+/* ===== NAVBAR responsive behavior ===== */
+
+/* Tablets: allow links to wrap and look clean */
+@media (max-width: 900px){
+  #pagenav{
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px; /* helpful once wrapping */
+  }
+
+  /* When wrapping, the segmented borders can look heavy.
+     Switch to pill buttons for a clean layout. */
+  #pagenav a{
+    border: var(--border);
+    border-radius: 999px;
+  }
+
+  #pagenav a:first-child,
+  #pagenav a:last-child{
+    border-left: var(--border);
+    border-right: var(--border);
+  }
+
+  #links{
+    justify-content: center;
+  }
+}
+
+/* Phones: stack nav and icons */
+@media (max-width: 560px){
+  #navbar{
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+  }
+
+  #pagenav{
+    justify-content: center;
+  }
+
+  #links{
+    justify-content: center;
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce){
+  #pagenav a,
+  #links a img{
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  #pagenav a{
+    transition: none !important;
+  }
+}
+
+/* ===== FOOTER ===== */
 #footer {
-    background-color: rgb(245, 214, 201);
-    color: rgb(73, 36, 62);
-    text-align: center;
-    padding: 16px 0;
-    margin-top: 40px;
-    font-family: georgia, serif;
-    font-size: 0.9rem;
+  background-color: var(--card);
+  color: var(--accent);
+  text-align: center;
+  padding: 16px 0;
+  margin-top: 40px;
+  font-family: georgia, serif;
+  font-size: 0.9rem;
 }
-

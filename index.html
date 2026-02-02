@@ -2,168 +2,302 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="Website, Shree, Khangaonkar">
-    <meta name="description" content="Portfolio website of Shree Khangaonkar, an Electrical and Computer
-     Engineer showcasing technical projects, coursework, research interests, and ways to connect.">
-    <title>Shree Khangaonkar's Website'</title>
-    <link rel="stylesheet" href="main.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="keywords" content="Website, Shree, Khangaonkar" />
+  <meta
+    name="description"
+    content="Portfolio website of Shree Khangaonkar, an Electrical and Computer Engineer showcasing technical projects, coursework, research interests, and ways to connect."
+  />
+  <title>Shree Khangaonkar's Website</title>
 
-    <style>
-        #bigbox{
-            margin-top: 30px;
-            /* border: 2px solid black; */
-            height: 700px;
-        }
+  <link rel="stylesheet" href="main.css" />
 
-        /* Shared fade-in setup */
-        .fade-step {
-            opacity: 0;
-            transform: translateY(15px);
-            transition: all 0.6s ease;
-        }
-        .fade-step.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
+  <style>
+    :root{
+      --bg: rgb(219, 175, 160);
+      --card: rgb(245, 214, 201);
+      --accent: rgb(73, 36, 62);
+      --hover: rgb(187, 132, 147);
+      --deep: rgb(86, 13, 64);
 
-        #shreenamebox{
-            /* border: 2px solid white; */
-            height: 350px;
-            display: flex;              
-            align-items: center;       
-            justify-content: center;     
-            text-align: center;        
-        }
-        #shreenamebox h1{
-            margin: 0; 
-            line-height: 1;
-            font-size: clamp(48px, 10vw, 120px);
-            color: rgb(86, 13, 64);
-        }
+      --border: 2px solid var(--accent);
 
-        #subtitle {
-            text-align: center;
-            height: auto;
-            margin-top: -40px; 
-            margin-bottom: 80px;
-        }
-        #subtitle h2 {
-            margin: 0;
-            display: inline-block;
-            padding: 10px 22px;
-            font-family: georgia, serif;
-            font-size: 22px;
-            font-weight: 500;
-            letter-spacing: 0.18em;
-            color: rgb(73, 36, 62);
-            background: rgba(255, 255, 255, 0.55);
-            border-radius: 999px;
-            border: 1px solid rgba(73, 36, 62, 0.3);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-        }
-        .cta-buttons {
-            margin-top: 24px;
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .btn {
-            padding: 18px 40px;
-            border-radius: 999px;
-            font-family: georgia, serif;
-            font-size: 20px;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            border: 2px solid rgb(73, 36, 62);
-            transition: all 0.3s ease;
-            min-width: 220px;
-            text-align: center;
-        }
-        .primary-btn {
-            background-color: rgb(73, 36, 62);
-            color: rgb(219, 175, 160);
-        }
-        .secondary-btn {
-            background-color: transparent;
-            color: rgb(73, 36, 62);
-        }
-        .btn:hover {
-            transform: translateY(-2px);
-            background-color: rgb(187, 132, 147);
-            color: rgb(73, 36, 62);
-        }
-        #subtitle-link {
-            text-decoration: none;
-        }
-        #subtitle-link h2 {
-            display: inline-block;
-            cursor: pointer;
-        }
+      --pad: clamp(16px, 4vw, 34px);
+      --max: 1400px;
 
-    </style>
+      /* Rough allowance for navbar + footer */
+      --hero-offset: 180px;
+    }
+
+    /* subtle divider under navbar (optional polish) */
+    .nav-divider{
+      height: 1px;
+      width: 100%;
+      background: rgba(73, 36, 62, 0.18);
+    }
+
+    /* ===== Hero wrapper ===== */
+    #bigbox{
+      width: min(var(--max), calc(100% - (var(--pad) * 2)));
+      margin: 0 auto;
+
+      min-height: calc(100svh - var(--hero-offset));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      padding: clamp(22px, 6vh, 64px) 0;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    /* ===== Shared fade-in setup ===== */
+    .fade-step {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: all 0.6s ease;
+    }
+    .fade-step.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== Name ===== */
+    #shreenamebox{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    #shreenamebox h1{
+      margin: 0;
+      font-family: georgia, serif;
+      color: var(--deep);
+      font-size: clamp(42px, 6vw, 112px);
+      line-height: 1.03;
+      letter-spacing: 0.01em;
+    }
+
+    /* One-line name on larger screens */
+    .name-nowrap{
+      white-space: nowrap;
+      display: inline-block;
+    }
+
+    /* small underline accent */
+    .name-accent{
+      display: inline-block;
+      margin-top: clamp(10px, 2.5vh, 16px);
+      height: 3px;
+      width: clamp(120px, 14vw, 220px);
+      border-radius: 999px;
+      background: rgba(86, 13, 64, 0.22);
+    }
+
+    /* ===== Subtitle pill ===== */
+    #subtitle{
+      margin-top: clamp(10px, 2.5vh, 16px);
+      margin-bottom: clamp(18px, 5vh, 38px);
+    }
+
+    #subtitle-link{
+      text-decoration: none;
+    }
+
+    #subtitle h2{
+      margin: 0;
+      display: inline-block;
+      padding: clamp(10px, 1.2vw, 14px) clamp(18px, 2.2vw, 26px);
+
+      font-family: georgia, serif;
+      font-size: clamp(16px, 1vw + 12px, 22px);
+      font-weight: 500;
+      letter-spacing: clamp(0.08em, 0.25vw, 0.18em);
+
+      color: var(--accent);
+      background: rgba(255, 255, 255, 0.55);
+      border-radius: 999px;
+      border: 1px solid rgba(73, 36, 62, 0.28);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.10);
+
+      transition: transform 0.2s ease, background-color 0.25s ease;
+      will-change: transform;
+      cursor: pointer;
+    }
+
+    #subtitle h2:hover{
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    /* ===== Focus chips ===== */
+    .chips{
+      margin-top: clamp(10px, 2.2vh, 14px);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .chip{
+      font-family: georgia, serif;
+      font-size: clamp(13px, 0.4vw + 12px, 15px);
+      color: var(--accent);
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(73, 36, 62, 0.24);
+      background: rgba(255,255,255,0.28);
+    }
+
+    /* ===== Buttons ===== */
+    .cta-buttons{
+      margin-top: clamp(12px, 3vh, 26px);
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .btn{
+      padding: clamp(14px, 1.4vw, 18px) clamp(22px, 2.6vw, 40px);
+      border-radius: 999px;
+      font-family: georgia, serif;
+      font-size: clamp(16px, 1vw + 12px, 20px);
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+
+      border: var(--border);
+      transition: transform 0.2s ease, background-color 0.25s ease, color 0.25s ease;
+      text-align: center;
+
+      width: clamp(240px, 36vw, 340px);
+      max-width: 100%;
+      box-sizing: border-box;
+      will-change: transform;
+    }
+
+    .primary-btn{
+      background-color: var(--accent);
+      color: var(--bg);
+    }
+
+    .secondary-btn{
+      background-color: transparent;
+      color: var(--accent);
+    }
+
+    .btn:hover{
+      transform: translateY(-2px);
+      background-color: var(--hover);
+      color: var(--accent);
+    }
+
+    /* ===== Phone tweaks ===== */
+    @media (max-width: 560px){
+      :root{
+        --hero-offset: 220px;
+      }
+
+      /* Allow wrap on very small screens if needed */
+      .name-nowrap{ white-space: normal; }
+
+      #bigbox{
+        min-height: calc(100svh - var(--hero-offset));
+        padding: 22px 0 40px;
+      }
+
+      .cta-buttons{ gap: 12px; }
+
+      .btn{
+        width: 100%;
+        max-width: 420px;
+      }
+    }
+
+    /* ===== Reduced motion ===== */
+    @media (prefers-reduced-motion: reduce){
+      .fade-step{
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .btn, #subtitle h2{
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <div id="navbar">
-        <div id="pagenav">
-            <a href="index.html">Home</a>
-            <a href="aboutme.html">About Me</a>
-            <a href="projects.html">Projects</a>
-            <a href="contact.html">Contact</a>
-        </div>
-        <div id="links">
-            <a href="https://www.linkedin.com/in/shree-khangaonkar/"  target="_blank">
-                <img id="linkedinlogo" src="img/linkedinlogo.png" alt="Linkedin Logo">
-            </a>  
-            <a href="https://github.com/reachshreek"  target="_blank">
-                <img id="githublogo" src="img/githublogo.png" alt="Github Logo">
-            </a>          
-        </div>
+  <div id="navbar">
+    <div id="pagenav">
+      <a href="index.html">Home</a>
+      <a href="aboutme.html">About Me</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div id="links">
+      <a href="https://www.linkedin.com/in/shree-khangaonkar/" target="_blank">
+        <img id="linkedinlogo" src="img/linkedinlogo.png" alt="Linkedin Logo" />
+      </a>
+      <a href="https://github.com/reachshreek" target="_blank">
+        <img id="githublogo" src="img/githublogo.png" alt="Github Logo" />
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-divider" aria-hidden="true"></div>
+
+  <main id="bigbox">
+    <div id="shreenamebox" class="fade-step">
+      <h1><span class="name-nowrap">Shree Khangaonkar</span></h1>
     </div>
 
-    <div id="bigbox">
-        <div id="shreenamebox" class="fade-step">
-            <h1>Shree Khangaonkar</h1>
-        </div>
-
-        <div id="subtitle" class="fade-step">
-            <a href="aboutme.html" id="subtitle-link">
-                <h2>Electrical &amp; Computer Engineer</h2>
-            </a>
-        </div>
-
-        <div class="cta-buttons fade-step">
-            <a href="projects.html" class="btn primary-btn">
-                Check My Projects
-            </a>
-            <a href="Shree_Resume.pdf" class="btn secondary-btn" target="_blank" download>
-                Download CV
-            </a>
-        </div>
+    <div class="fade-step" aria-hidden="true">
+      <span class="name-accent"></span>
     </div>
 
-    <script>
-        // Run after full page load
-        window.addEventListener('load', () => {
-            const steps = [
-                document.getElementById('shreenamebox'),
-                document.getElementById('subtitle'),
-                document.querySelector('.cta-buttons')
-            ];
+    <div id="subtitle" class="fade-step">
+      <a href="aboutme.html" id="subtitle-link">
+        <h2>Electrical &amp; Computer Engineer</h2>
+      </a>
 
-            steps.forEach((el, index) => {
-                if (!el) return;
-                setTimeout(() => {
-                    el.classList.add('show');
-                }, 400 * index); // 0ms, 400ms, 800ms
-            });
-        });
-    </script>
-    <footer id="footer">
-         <p>© 2025 Shree Khangaonkar. All rights reserved.</p>
-    </footer>
+      <div class="chips" aria-label="Focus areas">
+        <span class="chip">Audio &amp; Acoustics</span>
+        <span class="chip">Embedded Systems</span>
+        <span class="chip">ML / Generative Models</span>
+      </div>
+    </div>
+
+    <div class="cta-buttons fade-step">
+      <a href="projects.html" class="btn primary-btn">Check My Projects</a>
+      <a href="Shree_Resume.pdf" class="btn secondary-btn" target="_blank" download>Download CV</a>
+    </div>
+  </main>
+
+  <script>
+    window.addEventListener("load", () => {
+      const steps = [
+        document.getElementById("shreenamebox"),
+        document.querySelector(".name-accent")?.parentElement,
+        document.getElementById("subtitle"),
+        document.querySelector(".cta-buttons")
+      ];
+
+      steps.forEach((el, index) => {
+        if (!el) return;
+        setTimeout(() => el.classList.add("show"), 320 * index);
+      });
+    });
+  </script>
+
+  <footer id="footer">
+    <p>© 2025 Shree Khangaonkar. All rights reserved.</p>
+  </footer>
 </body>
 </html>

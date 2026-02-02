@@ -2,324 +2,455 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="Website, Shree, Khangaonkar">
-	<meta name="description" content="Explore engineering and creative projects by Shree Khangaonkar, including an interactive synesthesia-inspired installation,
-     custom-built high-fidelity speakers, and an unconditional audio generation model trained on audiological spectrograms.">
-    <title>Shree Khangaonkar's Website'</title>
-    <link rel="stylesheet" href="main.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="keywords" content="Website, Shree, Khangaonkar" />
+  <meta
+    name="description"
+    content="Explore engineering and creative projects by Shree Khangaonkar, including custom-built high-fidelity speakers, an unconditional audio generation model trained on spectrograms, a 1lb battlebot, and an interactive synesthesia-inspired installation."
+  />
+  <title>Projects – Shree Khangaonkar</title>
 
-    <style>
-        .projects-container {
-            width: 80%;
-            margin: 60px auto;
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-        }
-        .project-card {
-            background-color: rgb(245, 214, 201); 
-            border: 2px solid rgb(73, 36, 62);
-            border-radius: 20px;
-            padding: 24px;
-            display: flex;
-            gap: 24px;
-            align-items: center;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-        }
-        .project-img {
-            width: 260px;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 12px;
-            border: 2px solid rgb(73, 36, 62);
-        }
-        .project-content {
-            flex: 1;
-        }
-        .project-title {
-            font-family: georgia, serif;
-            color: rgb(73, 36, 62);
-            font-size: 28px;
-            margin: 0 0 10px 0;
-        }
-        .project-description {
-            font-size: 18px;
-            font-family: georgia, serif;
-            line-height: 1.6;
-            color: rgb(73, 36, 62);
-        }
-        .project-link {
-            display: inline-block;
-            margin-top: 14px;
-            padding: 10px 22px;
-            font-family: georgia, serif;
-            font-size: 18px;
-            color: rgb(73, 36, 62);
-            border: 2px solid rgb(73, 36, 62);
-            border-radius: 999px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        .project-link:hover {
-            background-color: rgb(187, 132, 147);
-            color: rgb(73, 36, 62);
-            transform: translateY(-2px);
-        }
-        /* Carousel Container */
-        .project-carousel {
-            position: relative;
-            width: 260px;
-            height: 180px;
-            overflow: hidden;
-            border-radius: 14px;
-            border: 2px solid rgb(73, 36, 62);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
+  <link rel="stylesheet" href="main.css" />
 
-        /* The sliding track */
-        .carousel-track {
-            display: flex;
-            transition: transform 0.4s ease;
-            height: 100%;
-        }
+  <style>
+    :root {
+      --bg: rgb(219, 175, 160);
+      --card: rgb(245, 214, 201);
+      --accent: rgb(73, 36, 62);
+      --hover: rgb(187, 132, 147);
 
-        /* Images — now uniform, clean, and auto-cropped */
-        .carousel-img {
-            width: 260px !important;
-            height: 180px !important;
-            object-fit: cover;          /* ensures consistent size */
-            flex-shrink: 0;
-            border: none;
-        }
+      --radius-lg: 20px;
+      --radius-md: 14px;
 
-        /* Sleek New Arrow Buttons */
-        .carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.65); /* soft glass effect */
-            border: 2px solid rgb(73, 36, 62);
-            color: rgb(73, 36, 62);
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.25s ease;
-            backdrop-filter: blur(4px);
-        }
+      --border: 2px solid var(--accent);
+      --shadow: 0 6px 15px rgba(0,0,0,0.1);
 
-        .carousel-btn:hover {
-            background: rgb(187, 132, 147);
-            transform: translateY(-50%) scale(1.08);
-        }
+      /* Fluid sizes */
+      --container-max: 1150px;
+      --container-pad: clamp(16px, 4vw, 32px);
 
-        /* SVG arrow icon */
-        .carousel-btn svg {
-            width: 18px;
-            height: 18px;
-            stroke-width: 2.5;
-        }
+      /* Media block scales smoothly */
+      --media-w: clamp(280px, 42vw, 470px);
+      --media-aspect: 3 / 2;
+    }
 
-        .prev-btn {
-            left: 8px;
-        }
+    /* Ensure footer sits at bottom on short pages */
+    main {
+      flex: 1;
+    }
 
-        .next-btn {
-            right: 8px;
-        }
-        .projects-title {
-            text-align: center;
-            font-family: georgia, serif;
-            font-size: 42px;
-            color: rgb(73, 36, 62);
-            margin-top: 60px;
-            margin-bottom: 10px;
-            letter-spacing: 0.04em;
-        }
-        .in-progress-badge {
-            display: inline-block;
-            padding: 4px 10px;
-            font-size: 12px;
-            font-family: georgia, serif;
-            color: rgb(73, 36, 62);
-            background-color: rgb(245, 214, 201);
-            border: 1px solid rgb(73, 36, 62);
-            border-radius: 999px;
-            margin-bottom: 6px;
-            opacity: 0.85;
-        }
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.7s ease;
-        }
+    /* Page title */
+    .projects-title {
+      text-align: center;
+      font-family: georgia, serif;
+      font-size: clamp(32px, 4vw, 46px);
+      color: var(--accent);
+      margin-top: clamp(22px, 5vh, 60px);
+      margin-bottom: 8px;
+      letter-spacing: 0.04em;
+    }
 
-        .fade-in.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    .projects-subtitle{
+      text-align: center;
+      font-family: georgia, serif;
+      color: rgba(73, 36, 62, 0.9);
+      font-size: clamp(15px, 0.7vw + 13px, 18px);
+      line-height: 1.5;
+      width: min(70ch, calc(100% - (var(--container-pad) * 2)));
+      margin: 0 auto clamp(22px, 4vh, 36px);
+    }
 
+    /* Container */
+    .projects-container {
+      width: min(var(--container-max), calc(100% - (var(--container-pad) * 2)));
+      margin: 0 auto clamp(36px, 6vh, 70px);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(22px, 3.5vw, 42px);
+    }
 
-    </style>
+    /* Card */
+    .project-card {
+      background-color: var(--card);
+      border: var(--border);
+      border-radius: var(--radius-lg);
+      padding: clamp(18px, 2.2vw, 26px);
 
+      display: flex;
+      gap: clamp(18px, 2.4vw, 28px);
+      align-items: center;
+      box-shadow: var(--shadow);
+
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      will-change: transform;
+    }
+
+    .project-card:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+    }
+
+    /* Media block */
+    .project-img,
+    .project-carousel {
+      width: var(--media-w);
+      aspect-ratio: var(--media-aspect);
+      border-radius: var(--radius-md);
+      border: var(--border);
+      overflow: hidden;
+      flex: 0 0 auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      background: rgba(255,255,255,0.25);
+    }
+
+    .project-img {
+      height: auto;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Text */
+    .project-content {
+      flex: 1 1 auto;
+      max-width: 68ch;
+    }
+
+    .project-title {
+      font-family: georgia, serif;
+      color: var(--accent);
+      font-size: clamp(22px, 2.2vw, 30px);
+      margin: 0 0 10px 0;
+      line-height: 1.15;
+    }
+
+    .project-description {
+      font-size: clamp(16px, 1.2vw, 18px);
+      font-family: georgia, serif;
+      line-height: 1.65;
+      color: var(--accent);
+      margin: 0;
+    }
+
+    .project-link {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 10px 22px;
+      font-family: georgia, serif;
+      font-size: 18px;
+      color: var(--accent);
+      border: var(--border);
+      border-radius: 999px;
+      text-decoration: none;
+      transition: transform 0.25s ease, background-color 0.25s ease;
+      will-change: transform;
+    }
+
+    .project-link:hover {
+      background-color: var(--hover);
+      transform: translateY(-2px);
+    }
+
+    .in-progress-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-family: georgia, serif;
+      color: var(--accent);
+      background-color: rgba(255,255,255,0.25);
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      margin-bottom: 8px;
+      opacity: 0.95;
+    }
+
+    /* Carousel */
+    .project-carousel { position: relative; }
+
+    .carousel-track {
+      display: flex;
+      height: 100%;
+      width: 100%;
+      transition: transform 0.4s ease;
+    }
+
+    .carousel-track img {
+      width: 100%;
+      height: 100%;
+      flex: 0 0 100%;
+      object-fit: cover;
+      border: none;
+      display: block;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.65);
+      border: var(--border);
+      color: var(--accent);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s ease;
+      backdrop-filter: blur(4px);
+    }
+
+    .carousel-btn:hover {
+      background: var(--hover);
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .carousel-btn svg {
+      width: 18px;
+      height: 18px;
+      stroke-width: 2.5;
+    }
+
+    .prev-btn { left: 10px; }
+    .next-btn { right: 10px; }
+
+    /* Fade-in */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: all 0.7s ease;
+    }
+    .fade-in.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stacking on smaller screens */
+    @media (max-width: 900px) {
+      .project-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .project-img,
+      .project-carousel {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .project-content {
+        max-width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in,
+      .carousel-track,
+      .project-link,
+      .carousel-btn,
+      .project-card {
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <div id="navbar">
-        <div id="pagenav">
-            <a href="index.html">Home</a>
-            <a href="aboutme.html">About Me</a>
-            <a href="projects.html">Projects</a>
-            <a href="contact.html">Contact</a>
-        </div>
-        <div id="links">
-            <a href="https://www.linkedin.com/in/shree-khangaonkar/"  target = "_blank" ><img id="linkedinlogo" src="img/linkedinlogo.png" alt="Linkedin Logo"></a>  
-            <a href="https://github.com/reachshreek"  target = "_blank" ><img id="githublogo" src="img/githublogo.png"alt="Github Logo" ></a>          
-        </div>
+  <div id="navbar">
+    <div id="pagenav">
+      <a href="index.html">Home</a>
+      <a href="aboutme.html">About Me</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html">Contact</a>
     </div>
+    <div id="links">
+      <a href="https://www.linkedin.com/in/shree-khangaonkar/" target="_blank">
+        <img id="linkedinlogo" src="img/linkedinlogo.png" alt="LinkedIn Logo" />
+      </a>
+      <a href="https://github.com/reachshreek" target="_blank">
+        <img id="githublogo" src="img/githublogo.png" alt="GitHub Logo" />
+      </a>
+    </div>
+  </div>
+
+  <main>
     <h1 class="projects-title fade-in">My Projects</h1>
+    <p class="projects-subtitle fade-in">
+      <!-- A few engineering + creative builds—spanning audio, embedded systems, interactive media, and robotics. -->
+    </p>
 
     <div class="projects-container">
 
-        <!-- Project Template (duplicate this block for more projects) -->
-        <div class="project-card fade-in" id = "syn">
+      <!-- 1) Custom Built Speaker -->
+      <div class="project-card fade-in" id="speaker">
+        <div class="project-carousel" aria-label="Custom Built Speaker carousel">
+          <button type="button" class="carousel-btn prev-btn" aria-label="Previous image">
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgb(73,36,62)" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
 
-             <img src="img/syn.jpg" alt="Image of the Synesthesia set up" class="project-img">
+          <div class="carousel-track">
+            <img src="img/speaker1.jpeg" alt="Front view of the speaker" />
+            <img src="img/speaker2.jpeg" alt="Back view of the speaker" />
+            <img src="img/speaker3.jpg" alt="Speaker schematics" />
+          </div>
 
-            <div class="project-content">
-                <span class="in-progress-badge">In Progress</span>
-
-                <h2 class="project-title">Experience Synesthesia</h2>
-
-                <p class="project-description">
-                    A sensory-blending art & engineering installation exploring how we can blend auditory and visual senses. We designed interactive sound mixing podiums 
-                    where audiences could alter music in real time while generating evolving projected artwork. This project integrated dynamic lighting, engraved tactile
-                     surfaces, and multi-station interaction to create an immersive experience inspired by synesthetic perception.
-                </p>
-
-                <a href="https://www.canva.com/design/DAG3-GsJSmM/Kr-AhlUcaQyIfKWi4vpRWg/view?utm_content=DAG3-GsJSmM&utm_campaign=designshare&utm_medium=link2&utm_source=un
-                iquelinks&utlId=h7ec95070c2" target="_blank" class="project-link">
-                    View More →
-                </a>
-            </div>
+          <button type="button" class="carousel-btn next-btn" aria-label="Next image">
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgb(73,36,62)" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 6l6 6-6 6" />
+            </svg>
+          </button>
         </div>
 
-        <div class="project-card fade-in" id = "speaker">
-            <div class="project-carousel">
-                <button class="carousel-btn prev-btn">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="rgb(73,36,62)" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M15 18l-6-6 6-6"/>
-                    </svg>
-                </button>
+        <div class="project-content">
+          <h2 class="project-title">Custom Built Speaker</h2>
+          <p class="project-description">
+            I built high-fidelity speakers from scratch—including enclosure modeling, analog crossover circuit design,
+            and driver selection. I also performed hands-on assembly with soldering, wiring, and acoustic testing using
+            signal generators and oscilloscopes.
+          </p>
+        </div>
+      </div>
 
-                <div class="carousel-track">
-                    <img src="img/speaker1.jpeg" alt="Front Picture of my speaker"  class="carousel-img">
-                    <img src="img/speaker2.jpeg" alt="Back picture of my speaker"  class="carousel-img">
-                    <img src="img/speaker3.jpg" alt="Speaker Schematics"  class="carousel-img">
-                </div>
+      <!-- 2) Unconditional Audio Generation Model -->
+      <div class="project-card fade-in" id="model">
+        <div class="project-carousel" aria-label="Audio generation model spectrogram carousel">
+          <button type="button" class="carousel-btn prev-btn" aria-label="Previous image">
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgb(73,36,62)" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
 
-                <button class="carousel-btn next-btn">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="rgb(73,36,62)" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M9 6l6 6-6 6"/>
-                    </svg>
-                </button>
-            </div>
+          <div class="carousel-track">
+            <img src="img/spect1.png" alt="Spectrogram 1" />
+            <img src="img/spect2.png" alt="Spectrogram 2" />
+          </div>
 
-            <div class="project-content">
-                <h2 class="project-title">Custom Built Speaker</h2>
-
-                <p class="project-description">
-                    This is a bit self-explanatory, I built high-fidelity speakers from scratch including using enclosure modeling, analog crossover circuit design, and driver 
-                    selection. I also performed hands-on assembly with soldering, wiring, and acoustic testing using signal generators and oscilloscopes.
-                </p>
-            </div>
+          <button type="button" class="carousel-btn next-btn" aria-label="Next image">
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgb(73,36,62)" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 6l6 6-6 6" />
+            </svg>
+          </button>
         </div>
 
-        <div class="project-card fade-in" id = "model">
-            <div class="project-carousel">
-                <button class="carousel-btn prev-btn">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="rgb(73,36,62)" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M15 18l-6-6 6-6"/>
-                    </svg>
-                </button>
+        <div class="project-content">
+          <h2 class="project-title">Unconditional Audio Generation Model</h2>
+          <p class="project-description">
+            I built a neural network model to generate new audio clips based on a single audio input using an unconditional
+            generative architecture. I implemented a diffusion model trained on spectrogram images—training on one piece of
+            music at a time, which keeps compute requirements low and makes it usable on most GPUs.
+          </p>
 
-                <div class="carousel-track">
-                    <img src="img/spect1.png" alt="Spectrogram 1"  class="carousel-img">
-                    <img src="img/spect2.png" alt="Spectrogram 2"  class="carousel-img">
-                </div>
-
-                <button class="carousel-btn next-btn">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="rgb(73,36,62)" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M9 6l6 6-6 6"/>
-                    </svg>
-                </button>
-            </div>
-
-            <div class="project-content">
-                <h2 class="project-title">Unconditional Audio Generation Model</h2>
-
-                <p class="project-description">
-                    I built a neural network model to generate new audio clips based on a single audio input, using an unconditional generative architecture. In this model, I 
-                    implemented a diffusion model that would train on images of music through spectrograms. I trained the model only on one piece of music at a time, allowing
-                    for little to no extra data required - due to this, it can be done on any GPU. See "Learn More" for in-depth analysis.
-                </p>
-
-                <a href="https://docs.google.com/presentation/d/e/2PACX-1vR_vM9-sgL92GzXxbDMwnyRgwuqmkE9OTIPFDgZpBx4UZlWnDbpt3Bf64iK7UKbE91vg-0Nhc5-VnZv/pub?start=true&loop=false&delayms=5000" target="_blank" class="project-link">
-                    Learn More →
-                </a>
-            </div>
+          <a
+            href="https://docs.google.com/presentation/d/e/2PACX-1vR_vM9-sgL92GzXxbDMwnyRgwuqmkE9OTIPFDgZpBx4UZlWnDbpt3Bf64iK7UKbE91vg-0Nhc5-VnZv/pub?start=true&loop=false&delayms=5000"
+            target="_blank"
+            class="project-link"
+          >
+            Learn More →
+          </a>
         </div>
+      </div>
+
+      <!-- 3) 1lb Battlebot -->
+      <div class="project-card fade-in" id="battlebot">
+        <div class="project-carousel" aria-label="1lb Battlebot carousel">
+          <button type="button" class="carousel-btn prev-btn" aria-label="Previous image">
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgb(73,36,62)" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+
+          <div class="carousel-track">
+            <img src="img/battle1.jpeg" alt="Battlebot full view" />
+            <img src="img/battle2.jpeg"/>
+          </div>
+
+          <button type="button" class="carousel-btn next-btn" aria-label="Next image">
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgb(73,36,62)" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 6l6 6-6 6" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="project-content">
+          <h2 class="project-title">1lb Battlebot (Vertical Spinner)</h2>
+          <p class="project-description">
+            We designed and built a <b>&gt;1lb</b> battlebot for competitions featuring a vertical spinner weapon.
+            We iterated through design and testing to balance weapon power, durability, and strict weight constraints—
+            focusing on reliability, impact resistance, and controllability in the arena.
+          </p>
+        </div>
+      </div>
+
+      <!-- 4) Experience Synesthesia -->
+      <div class="project-card fade-in" id="syn">
+        <img src="img/syn.jpg" alt="Image of the Synesthesia setup" class="project-img" />
+
+        <div class="project-content">
+          <span class="in-progress-badge">In Progress</span>
+          <h2 class="project-title">Experience Synesthesia</h2>
+          <p class="project-description">
+            A sensory-blending art &amp; engineering installation exploring how we can blend auditory and visual senses.
+            We designed interactive sound mixing podiums where audiences could alter music in real time while generating
+            evolving projected artwork. This project integrated dynamic lighting, engraved tactile surfaces, and multi-station
+            interaction to create an immersive experience inspired by synesthetic perception.
+          </p>
+
+          <a
+            href="https://www.canva.com/design/DAG3-GsJSmM/Kr-AhlUcaQyIfKWi4vpRWg/view?utm_content=DAG3-GsJSmM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h7ec95070c2"
+            target="_blank"
+            class="project-link"
+          >
+            View More →
+          </a>
+        </div>
+      </div>
 
     </div>
+  </main>
 
-    <footer id="footer">
-         <p>© 2025 Shree Khangaonkar. All rights reserved.</p>
-    </footer>
+  <footer id="footer">
+    <p>© 2025 Shree Khangaonkar. All rights reserved.</p>
+  </footer>
 
+  <script>
+    // Responsive carousel: slides by 100% (no pixel math)
+    document.querySelectorAll(".project-carousel").forEach((carousel) => {
+      const track = carousel.querySelector(".carousel-track");
+      const images = carousel.querySelectorAll(".carousel-track img");
+      const prev = carousel.querySelector(".prev-btn");
+      const next = carousel.querySelector(".next-btn");
 
-<script>
-document.querySelectorAll('.project-carousel').forEach(carousel => {
-    const track = carousel.querySelector('.carousel-track');
-    const images = carousel.querySelectorAll('.carousel-track img');
-    const prev = carousel.querySelector('.prev-btn');
-    const next = carousel.querySelector('.next-btn');
+      let index = 0;
 
-    let index = 0;
+      function updateCarousel() {
+        track.style.transform = `translateX(-${index * 100}%)`;
+      }
 
-    function updateCarousel() {
-        track.style.transform = `translateX(-${index * 260}px)`;
-    } 
-
-    next.addEventListener('click', () => {
+      next.addEventListener("click", () => {
         index = (index + 1) % images.length;
         updateCarousel();
-    });
+      });
 
-    prev.addEventListener('click', () => {
+      prev.addEventListener("click", () => {
         index = (index - 1 + images.length) % images.length;
         updateCarousel();
+      });
+
+      updateCarousel();
     });
-});
-</script>
-<script>
-window.addEventListener("load", () => {
-    const fadeItems = document.querySelectorAll(".fade-in");
-    
-    fadeItems.forEach((el, index) => {
-        setTimeout(() => {
-            el.classList.add("show");
-        }, 800 + index * 300); 
-        // 1200ms → after navbar finishes (0.55s) and feels natural
-        // Each item fades in every 0.5s
+  </script>
+
+  <script>
+    // Fade-in animation
+    window.addEventListener("load", () => {
+      const fadeItems = document.querySelectorAll(".fade-in");
+      fadeItems.forEach((el, index) => {
+        setTimeout(() => el.classList.add("show"), 700 + index * 180);
+      });
     });
-});
-</script>
-
-
-
-
+  </script>
 </body>
+</html>
