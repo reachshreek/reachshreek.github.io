@@ -63,6 +63,15 @@ main { flex: 1; }
 .fact strong { font-size: 13px; line-height: 1.4; }
 .about-copy h2 { margin: 0 0 25px; font-family: var(--serif); font-size: clamp(29px,3.2vw,42px); font-weight: 400; letter-spacing: -.03em; line-height: 1.12; }
 .about-copy p { max-width: 720px; margin: 0 0 20px; color: var(--muted); font-size: 17px; line-height: 1.75; }
+.experience-section { margin: 42px 0 48px; }
+.experience-section > h3 { margin: 0 0 12px; color: var(--accent-dark); font-size: 12px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+.experience-entry { padding: 24px 0; border-top: 1px solid var(--line); }
+.experience-entry:last-child { border-bottom: 1px solid var(--line); }
+.experience-meta { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; }
+.experience-meta strong { font: 400 24px var(--serif); }
+.experience-meta span { flex: 0 0 auto; color: var(--muted); font-size: 12px; font-weight: 700; }
+.experience-entry h4 { margin: 7px 0 10px; color: var(--accent-dark); font-size: 13px; font-weight: 800; }
+.experience-entry p { margin-bottom: 0; font-size: 15px; line-height: 1.65; }
 .discipline-list { margin: 44px 0; border-top: 1px solid var(--line); }
 .discipline { display: grid; grid-template-columns: 44px 1fr; gap: 18px; padding: 21px 0; border-bottom: 1px solid var(--line); }
 .discipline span { color: var(--accent); font: italic 18px var(--serif); } .discipline h3 { margin: 0 0 6px; font: 400 22px var(--serif); }
@@ -121,7 +130,7 @@ main { flex: 1; }
 @media (max-width: 520px) {
   :root { --page: calc(100% - 28px); } .site-nav { gap: 15px; } .site-nav a { font-size: 12px; }
   .display-title { font-size: clamp(48px,16vw,70px); } .hero { gap: 56px; padding-top: 58px; } .hero-portrait { width: calc(100% - 12px); min-height: 430px; } .image-label { right: -10px; }
-  .button-row .button { width: 100%; } .page-intro .lede { margin-left: 0; } .about-facts { grid-template-columns: 1fr; }
+  .button-row .button { width: 100%; } .page-intro .lede { margin-left: 0; } .about-facts { grid-template-columns: 1fr; } .experience-meta { align-items: flex-start; flex-direction: column; gap: 5px; }
   .project { padding: 62px 0; gap: 30px; } .project h2 { font-size: 36px; }
   .footer-shell { padding: 24px 0; flex-direction: column; align-items: flex-start; justify-content: center; }
 }

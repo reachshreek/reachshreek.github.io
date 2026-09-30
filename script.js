@@ -1,5 +1,23 @@
 document.documentElement.classList.add("js");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// Clean Vercel routes do not resolve when an HTML file is opened directly.
+// Use the real filenames only for local file previews.
+if (window.location.protocol === "file:") {
+  const localRoutes = {
+    "/": "index.html",
+    "/aboutme": "aboutme.html",
+    "/projects": "projects.html",
+    "/contact": "contact.html",
+    "/Shree_Resume.pdf": "Shree_Resume.pdf"
+  };
+
+  document.querySelectorAll("a[href]").forEach((link) => {
+    const localPath = localRoutes[link.getAttribute("href")];
+    if (localPath) link.setAttribute("href", localPath);
+  });
+}
+
 document.querySelectorAll("[data-year]").forEach((year) => { year.textContent = new Date().getFullYear(); });
 
 const revealItems = document.querySelectorAll(".reveal");
