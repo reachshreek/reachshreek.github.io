@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="540" viewBox="0 0 1000 540" role="img" aria-labelledby="title desc">
+  <title id="title">Cove controller and CAN network</title>
+  <desc id="desc">ROS 2 on the Pi exchanges commands and feedback with the Teensy over USB serial. An external transceiver joins the Teensy to the two-wire CAN trunk connecting seven actuators, with one terminator at each end.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10Z" fill="#781f3a"/></marker></defs>
+  <rect width="1000" height="540" fill="#fffafa"/>
+  <g font-family="Arial, sans-serif" fill="#27171c">
+    <text x="36" y="42" font-size="13" letter-spacing="2" fill="#781f3a">COVE / COMMANDS &amp; FEEDBACK</text>
+    <text x="36" y="73" font-size="15" fill="#705d63">Host-level motion targets → joint-level actuator communication</text>
+    <g fill="#f5eeee" stroke="#d5bfc5"><rect x="36" y="115" width="240" height="110" rx="5"/><rect x="388" y="115" width="224" height="110" rx="5"/><rect x="736" y="115" width="228" height="110" rx="5"/></g>
+    <g text-anchor="middle"><text x="156" y="148" font-size="20">Raspberry Pi 5</text><text x="156" y="177" font-size="14" fill="#705d63">ROS 2 / joint commands</text><text x="156" y="202" font-size="14" fill="#705d63">Bridge / state feedback</text><text x="500" y="148" font-size="20">Teensy 4.1</text><text x="500" y="177" font-size="14" fill="#705d63">Readiness states / CAN</text><text x="500" y="202" font-size="14" fill="#705d63">Local actuator interface</text><text x="850" y="148" font-size="20">CAN transceiver</text><text x="850" y="177" font-size="14" fill="#705d63">Logic ↔ physical bus</text><text x="850" y="202" font-size="14" fill="#705d63">CANH / CANL interface</text></g>
+    <g fill="none" stroke="#781f3a" stroke-width="2.5" marker-start="url(#arrow)" marker-end="url(#arrow)"><path d="M280 170H383"/><path d="M617 170H731"/></g>
+    <g font-size="12" fill="#705d63" text-anchor="middle"><text x="332" y="147">USB / serial</text><text x="674" y="147">CAN TX / RX</text></g>
+    <path d="M850 225V270H142V332" fill="none" stroke="#781f3a" stroke-width="2.5"/>
+    <g fill="none" stroke-width="3"><path d="M70 332H930" stroke="#781f3a"/><path d="M70 351H930" stroke="#a46c7c"/></g>
+    <g fill="#fffafa" stroke="#781f3a" stroke-width="2"><rect x="62" y="316" width="16" height="51" rx="2"/><rect x="922" y="316" width="16" height="51" rx="2"/></g>
+    <g font-size="13" fill="#705d63" text-anchor="middle"><text x="70" y="294">120 Ω</text><text x="930" y="294">120 Ω</text></g>
+    <text x="160" y="308" font-size="12" fill="#781f3a">CANH</text><text x="224" y="308" font-size="12" fill="#a46c7c">CANL</text>
+    <g fill="none" stroke="#705d63" stroke-width="2"><path d="M210 351V392M310 351V392M410 351V392M510 351V392M610 351V392M710 351V392M810 351V392"/></g>
+    <g fill="#f5eeee" stroke="#d5bfc5"><rect x="176" y="392" width="68" height="60" rx="4"/><rect x="276" y="392" width="68" height="60" rx="4"/><rect x="376" y="392" width="68" height="60" rx="4"/><rect x="476" y="392" width="68" height="60" rx="4"/><rect x="576" y="392" width="68" height="60" rx="4"/><rect x="676" y="392" width="68" height="60" rx="4"/><rect x="776" y="392" width="68" height="60" rx="4"/></g>
+    <g font-size="19" text-anchor="middle"><text x="210" y="429">J1</text><text x="310" y="429">J2</text><text x="410" y="429">J3</text><text x="510" y="429">J4</text><text x="610" y="429">J5</text><text x="710" y="429">J6</text><text x="810" y="429">J7</text></g>
+    <path d="M36 481H964" stroke="#d5bfc5"/>
+    <text x="36" y="508" font-size="13" fill="#705d63">Two-wire trunk / short actuator stubs / termination at each physical end</text>
+    <text x="36" y="529" font-size="12" fill="#705d63">Short drops represent CAN-pair connections to each actuator.</text>
+  </g>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+  <title id="title">Cove 24 V power distribution</title>
+  <desc id="desc">A 24 V PSU supplies four 24 V actuators directly and three 48 V actuators through DC/DC step-up conversion. Actuator ratings alternate from J1 through J7: 24, 48, 24, 48, 24, 48, 24 V. The converter block groups the voltage-conversion function.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#781f3a"/></marker></defs>
+  <rect width="1000" height="560" fill="#fffafa"/>
+  <g font-family="Arial, sans-serif" fill="#27171c">
+    <text x="36" y="42" font-size="13" letter-spacing="2" fill="#781f3a">COVE / POWER ARCHITECTURE</text>
+    <text x="36" y="72" font-size="15" fill="#705d63">24 V system supply / alternating 24 V and 48 V actuators</text>
+    <g fill="#f5eeee" stroke="#d5bfc5">
+      <rect x="36" y="112" width="180" height="84" rx="5"/>
+      <rect x="280" y="112" width="220" height="84" rx="5"/>
+      <rect x="610" y="112" width="354" height="110" rx="5"/>
+    </g>
+    <g text-anchor="middle">
+      <text x="126" y="147" font-size="21">24 V PSU</text><text x="126" y="175" font-size="13" fill="#705d63">System power input</text>
+      <text x="390" y="147" font-size="20">24 V distribution</text><text x="390" y="175" font-size="13" fill="#705d63">Common input supply</text>
+      <text x="787" y="145" font-size="20">24 V actuator group</text><text x="787" y="175" font-size="18">J1 / J3 / J5 / J7</text><text x="787" y="204" font-size="13" fill="#705d63">Direct 24 V supply</text>
+    </g>
+    <rect x="280" y="300" width="220" height="90" rx="5" fill="#781f3a"/>
+    <g fill="#fffafa" text-anchor="middle"><text x="390" y="335" font-size="20">DC/DC step-up</text><text x="390" y="365" font-size="16">24 V → 48 V</text></g>
+    <rect x="610" y="300" width="354" height="110" rx="5" fill="#f5eeee" stroke="#d5bfc5"/>
+    <g text-anchor="middle"><text x="787" y="333" font-size="20">48 V actuator group</text><text x="787" y="363" font-size="18">J2 / J4 / J6</text><text x="787" y="392" font-size="13" fill="#705d63">Voltage conversion from the 24 V supply</text></g>
+    <g fill="none" stroke="#781f3a" stroke-width="2.5" marker-end="url(#arrow)"><path d="M216 154H278"/><path d="M500 154H608"/><path d="M390 196V298"/><path d="M500 345H608"/></g>
+    <g font-size="13" fill="#705d63" text-anchor="middle"><text x="555" y="137">24 V</text><text x="430" y="253">24 V input</text><text x="555" y="328">48 V</text></g>
+    <text x="36" y="453" font-size="12" letter-spacing="1.5" fill="#781f3a">ACTUATOR ORDER / J1 → J7</text>
+    <g fill="#f5eeee" stroke="#d5bfc5"><rect x="36" y="475" width="116" height="60" rx="4"/><rect x="300" y="475" width="116" height="60" rx="4"/><rect x="564" y="475" width="116" height="60" rx="4"/><rect x="828" y="475" width="116" height="60" rx="4"/></g>
+    <g fill="#781f3a"><rect x="168" y="475" width="116" height="60" rx="4"/><rect x="432" y="475" width="116" height="60" rx="4"/><rect x="696" y="475" width="116" height="60" rx="4"/></g>
+    <g text-anchor="middle" font-size="16"><text x="94" y="500">J1</text><text x="358" y="500">J3</text><text x="622" y="500">J5</text><text x="886" y="500">J7</text></g>
+    <g text-anchor="middle" font-size="13" fill="#705d63"><text x="94" y="521">24 V</text><text x="358" y="521">24 V</text><text x="622" y="521">24 V</text><text x="886" y="521">24 V</text></g>
+    <g text-anchor="middle" fill="#fffafa" font-size="16"><text x="226" y="500">J2</text><text x="490" y="500">J4</text><text x="754" y="500">J6</text></g>
+    <g text-anchor="middle" fill="#fffafa" font-size="13"><text x="226" y="521">48 V</text><text x="490" y="521">48 V</text><text x="754" y="521">48 V</text></g>
+  </g>
+</svg>

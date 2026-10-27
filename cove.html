@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Cove, a 7-DOF robotic arm built in ten weeks at Terra Labs. Shree Khangaonkar's electrical design, power distribution, CAN bus integration, and four-state Teensy firmware.">
+  <meta name="theme-color" content="#781f3a">
+  <title>Cove: 7-DOF Robotic Arm | Shree Khangaonkar</title>
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="cove.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header"><div class="nav-shell"><a class="brand" href="/" aria-label="Shree Khangaonkar, home"><span class="brand-name">Shree Khangaonkar</span></a><nav class="site-nav" aria-label="Primary navigation"><a href="/">Home</a><a href="/aboutme">About</a><a href="/projects" aria-current="page">Work</a><a href="/contact">Contact</a></nav><div class="social-nav"><a class="icon-link" href="https://www.linkedin.com/in/shree-khangaonkar/" target="_blank" rel="noopener noreferrer" aria-label="Shree on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 8.2H3.2V21h3.3V8.2ZM4.8 3A1.9 1.9 0 1 0 4.8 6.8 1.9 1.9 0 0 0 4.8 3ZM21 13.7c0-3.9-2.1-5.8-4.9-5.8-2.3 0-3.3 1.2-3.8 2.1V8.2H9V21h3.3v-6.3c0-1.7.3-3.3 2.4-3.3 2 0 2.1 1.9 2.1 3.4V21H21v-7.3Z"/></svg></a><a class="icon-link" href="https://github.com/reachshreek" target="_blank" rel="noopener noreferrer" aria-label="Shree on GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.9c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.7.1-.7.1-.7 1 0 1.6 1 1.6 1 .9 1.6 2.4 1.1 2.9.9.1-.7.4-1.1.7-1.3-2.2-.3-4.6-1.1-4.6-5A3.9 3.9 0 0 1 6.8 8c-.1-.3-.5-1.3.1-2.7 0 0 .9-.3 2.8-1.1a9.5 9.5 0 0 1 5.1 0c2-1.4 2.8-1.1 2.8-1.1.6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.8V21c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg></a></div></div></header>
+<main id="main-content" class="page-shell cove-page">
+  <header class="cove-intro">
+    <a class="back-link" href="/projects">&#8592; All projects</a>
+    <p class="eyebrow">Terra Labs / Electrical &amp; firmware</p>
+    <h1 class="page-title">Cove: 7-DOF<br>Robotic Arm</h1>
+    <p class="lede">Electrical Lead for a ten-week build: power distribution, a seven-actuator CAN network, and Teensy firmware integrated with ROS 2.</p>
+    <dl class="cove-facts"><div><dt>My role</dt><dd>Electrical Lead</dd></div><div><dt>Build timeline</dt><dd>10 weeks</dd></div><div><dt>Control stack</dt><dd>Teensy 4.1 + Pi 5 + ROS 2</dd></div><div><dt>Outcome</dt><dd>Motion across all 7 actuators</dd></div></dl>
+  </header>
+  <div class="cove-layout">
+    <nav class="cove-toc" aria-label="Documentation sections"><p>Inside the build</p><a href="#architecture">01 / Electrical architecture</a><a href="#firmware">02 / Four-state firmware</a><a href="#power">03 / PSU vs. battery</a><a href="#motion">04 / Motion</a></nav>
+    <article class="cove-document">
+      <section id="architecture" class="doc-section">
+        <p class="eyebrow">01 / Electrical architecture</p><h2>Power distribution &amp; CAN control.</h2>
+        <figure class="doc-figure"><div class="diagram-scroll" tabindex="0" role="region" aria-label="Electrical power architecture; scroll horizontally on small screens"><img class="doc-diagram" src="img/coveimg/power-architecture.svg" alt="A 24 V PSU powers the 24 V actuator group directly and the 48 V actuator group through DC/DC voltage conversion. Actuator ratings alternate from J1 to J7: 24, 48, 24, 48, 24, 48, 24 V." width="1000" height="560" fetchpriority="high"></div><figcaption>24 V system supply with voltage conversion for the 48 V actuator group.</figcaption></figure>
+        <p>I designed the power distribution around a <strong>24 V system supply</strong> and seven actuators with alternating voltage ratings:</p>
+        <ul class="technical-list">
+          <li><strong>24 V actuators:</strong> J1, J3, J5, and J7 use the system’s 24 V supply.</li>
+          <li><strong>48 V actuators:</strong> J2, J4, and J6 use DC/DC step-up conversion from the 24 V supply. Local voltage conversion accommodates both actuator ratings within one power-distribution architecture.</li>
+          <li><strong>Control:</strong> Pi / ROS 2 &harr; USB serial &harr; Teensy &harr; CAN transceiver &harr; J1&ndash;J7. The CANH/CANL twisted-pair trunk uses short stubs and two 120 &#937; terminations, one at each physical end.</li>
+        </ul>
+        <h3>CAN topology</h3>
+        <figure class="doc-figure"><div class="diagram-scroll" tabindex="0" role="region" aria-label="CAN and controller diagram; scroll horizontally on small screens"><img class="doc-diagram" src="img/coveimg/can-architecture.svg" alt="ROS 2 on the Pi exchanges commands and feedback with the Teensy over USB serial. A transceiver connects the Teensy to a CAN trunk linking J1 through J7, terminated at both ends." width="1000" height="540" loading="lazy"></div><figcaption>Shared communication trunk; motor power uses separate branches.</figcaption></figure>
+      </section>
+      <section id="firmware" class="doc-section">
+        <p class="eyebrow">02 / Four-state firmware</p><h2>Separate power from motion readiness.</h2>
+        <p>I designed four actuator states: <strong>Off</strong>, <strong>Power available</strong>, <strong>Power on</strong>, and <strong>Movement ready</strong>. Separating supply availability, energization, and motion readiness added redundancy and made startup faults easier to isolate.</p>
+        <figure class="doc-figure"><div class="diagram-scroll" tabindex="0" role="region" aria-label="Four-state firmware sequence; scroll horizontally on small screens"><img class="doc-diagram" src="img/coveimg/firmware-states.svg" alt="Actuator states in order: Off, Power available, Power on, Movement ready." width="1000" height="280" loading="lazy"></div></figure>
+        <p>The Teensy connects the ROS 2 command interface to the actuator CAN network. The four-state system makes electrical availability, actuator power, and movement readiness separate steps during bring-up.</p>
+      </section>
+      <section id="power" class="doc-section">
+        <p class="eyebrow">03 / PSU vs. battery</p><h2>External power for the bottle-holding task.</h2>
+        <p>We chose a PSU because the power required to hold a bottle of water was very low in our use case. External power also avoided onboard battery charging and management hardware.</p>
+        <p>The system runs on <strong>24 V</strong>, with step-up conversion supplying the three 48 V actuators. A common input voltage simplifies distribution while the converters supply the voltage each actuator group requires.</p>
+        <p>Electrical power follows <code>P = V &middot; I</code>. The voltage increase is 2:1; converter input current accounts for the 48 V load power and conversion losses. This makes converter efficiency part of the 24 V supply’s load budget.</p>
+      </section>
+      <section id="motion" class="doc-section">
+        <p class="eyebrow">04 / Motion</p><h2>Seven actuators, integrated with ROS 2.</h2>
+        <p>I routed the harness to accommodate all seven degrees of freedom and connected the actuator network to the ROS 2 software team. The Pi supplies joint-level targets; the Teensy handles actuator communication and returns feedback.</p>
+        <p>As the team’s only electrical engineer, I brought in a mechanical teammate to help with soldering, crimping, and harness assembly. We achieved motion across all seven actuators within the ten-week build.</p>
+        <div class="motion-media">
+          <figure class="doc-figure"><video class="doc-video" controls playsinline preload="metadata" poster="img/coveimg/cove3.jpg" aria-label="Watch the Cove robotic arm demonstration"><source src="img/coveimg/covevideo.mp4" type="video/mp4">Your browser does not support embedded video. <a href="img/coveimg/covevideo.mp4">Watch the demonstration.</a></video><figcaption>Cove demonstration.</figcaption></figure>
+          <figure class="doc-figure"><img class="build-photo" src="img/coveimg/cove2.jpg" alt="Hands-on wiring and soldering beside a Cove actuator" width="1280" height="853" loading="lazy"><figcaption>Harness assembly at a joint.</figcaption></figure>
+        </div>
+        <div class="button-row doc-end-links"><a class="button primary" href="/projects">Back to projects</a><a class="button" href="/contact">Get in touch</a></div>
+      </section>
+    </article>
+  </div>
+</main>
+<footer class="site-footer"><div class="footer-shell"><span>&copy; <span data-year></span> Shree Khangaonkar</span><span>Bay Area + Los Angeles</span></div></footer>
+</body>
+</html>

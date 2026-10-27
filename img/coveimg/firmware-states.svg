@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="280" viewBox="0 0 1000 280" role="img" aria-labelledby="title desc">
+  <title id="title">Cove four-state actuator readiness sequence</title>
+  <desc id="desc">The four actuator firmware states are Off, Power available, Power on, and Movement ready. The sequence separates available power, energized actuators, and readiness for movement.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#781f3a"/></marker></defs>
+  <rect width="1000" height="280" fill="#fffafa"/>
+  <g font-family="Arial, sans-serif" fill="#27171c">
+    <text x="36" y="42" font-size="13" letter-spacing="2" fill="#781f3a">COVE / FOUR-STATE FIRMWARE</text>
+    <text x="36" y="73" font-size="15" fill="#705d63">Progressive readiness for each of the seven actuators</text>
+    <g fill="#f5eeee" stroke="#d5bfc5"><rect x="36" y="108" width="200" height="116" rx="5"/><rect x="279" y="108" width="200" height="116" rx="5"/><rect x="522" y="108" width="200" height="116" rx="5"/></g>
+    <rect x="765" y="108" width="200" height="116" rx="5" fill="#781f3a"/>
+    <g font-size="12" fill="#705d63"><text x="54" y="133">STATE 01</text><text x="297" y="133">STATE 02</text><text x="540" y="133">STATE 03</text></g>
+    <text x="783" y="133" font-size="12" fill="#efcdd6">STATE 04</text>
+    <g font-size="20"><text x="54" y="166">Off</text><text x="297" y="166">Power available</text><text x="540" y="166">Power on</text><text x="783" y="166" fill="#fffafa">Movement ready</text></g>
+    <g font-size="13" fill="#705d63"><text x="54" y="199">Inactive</text><text x="297" y="199">Supply available</text><text x="540" y="199">Actuator energized</text></g>
+    <text x="783" y="199" font-size="13" fill="#fffafa">Ready for motion</text>
+    <g fill="none" stroke="#781f3a" stroke-width="2" marker-end="url(#arrow)"><path d="M239 166H274"/><path d="M482 166H517"/><path d="M725 166H760"/></g>
+    <text x="36" y="262" font-size="12" fill="#705d63">Electrical availability, actuator power, and movement readiness are distinct conditions.</text>
+  </g>
+</svg>

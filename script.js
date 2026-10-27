@@ -8,6 +8,7 @@ if (window.location.protocol === "file:") {
     "/": "index.html",
     "/aboutme": "aboutme.html",
     "/projects": "projects.html",
+    "/cove": "cove.html",
     "/contact": "contact.html",
     "/Shree_Resume.pdf": "Shree_Resume.pdf"
   };
@@ -38,11 +39,22 @@ document.querySelectorAll(".carousel").forEach((carousel) => {
   const update = () => {
     track.style.transform = `translateX(-${current * 100}%)`;
     status.textContent = `${current + 1} / ${slides.length}`;
-    slides.forEach((slide, index) => slide.setAttribute("aria-hidden", String(index !== current)));
+    slides.forEach((slide, index) => {
+      const hidden = index !== current;
+      slide.setAttribute("aria-hidden", String(hidden));
+      slide.inert = hidden;
+      if (hidden && slide.tagName === "VIDEO") slide.pause();
+    });
   };
   carousel.querySelector("[data-direction='next']")?.addEventListener("click", () => { current = (current + 1) % slides.length; update(); });
   carousel.querySelector("[data-direction='previous']")?.addEventListener("click", () => { current = (current - 1 + slides.length) % slides.length; update(); });
-  carousel.addEventListener("keydown", (event) => { if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return; current = event.key === "ArrowRight" ? (current + 1) % slides.length : (current - 1 + slides.length) % slides.length; update(); });
+  carousel.addEventListener("keydown", (event) => {
+    // Let native video controls keep their own seeking and volume shortcuts.
+    if (event.target.closest("video") || (event.key !== "ArrowLeft" && event.key !== "ArrowRight")) return;
+    event.preventDefault();
+    current = event.key === "ArrowRight" ? (current + 1) % slides.length : (current - 1 + slides.length) % slides.length;
+    update();
+  });
   update();
 });
 
